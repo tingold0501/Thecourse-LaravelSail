@@ -109,6 +109,22 @@ class UserController extends Controller
         return response()->json(['check'=>true, 'msg'=>'Cập Nhập Thành Công']);
     
     }
+
+
+    public function updatePhone(Request $request, User $user){
+        $validator = Validator::make($request->all(), [
+            'id' => 'required|exists:users,id',
+            'phone' => 'required|unique:users,phone',
+        ],[
+            'id.required' => 'Mã Người Không Được Trống',
+            'id.exists' => 'Mã Không Tồn Tại',
+            'phone.required' => 'Số Điện Thoại Không Được Rỗng',
+            'phone.unique' => 'Số Điện Thoại Đã Tồn Tại',
+            
+        ]);
+        User::where('id',$request->id)->update(['phone'=>$request->phone]);
+        return response()->json(['check'=>true, 'msg'=>'Cập Nhập Thành Công']);
+    }
     /**
      * Store a newly created resource in storage.
      */
