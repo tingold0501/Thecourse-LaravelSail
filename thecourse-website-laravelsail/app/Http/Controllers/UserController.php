@@ -36,6 +36,9 @@ class UserController extends Controller
     /**
      * Show the form for creating a new resource.
      */
+    public function loginTeacher(Request $request, User $user){
+        
+    }
     public function create(Request $request, User $user)
     {
         $validator = Validator::make($request->all(), [
