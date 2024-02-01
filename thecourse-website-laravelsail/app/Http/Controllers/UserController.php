@@ -32,6 +32,13 @@ class UserController extends Controller
         $users = DB::table('users')->where('status', 1)->count();
         return response()->json($users);
     }
+    public function getTeacher(){
+        $teachers = DB::table('users')
+        ->join('roles','users.role_id', '=', 'roles.id')
+        ->where('roles.name','=','Teacher')
+        ->get();
+        return response()->json($teachers);
+    }
 
     /**
      * Show the form for creating a new resource.
