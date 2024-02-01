@@ -6,6 +6,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Mail;
 class UserController extends Controller
 {
     /**
@@ -69,6 +70,7 @@ class UserController extends Controller
         }
         $password = random_int(111111,999999);
         User::create(['name'=>$request->name, 'email'=>$request->email, 'password'=>$password, 'phone'=>$request->phone, 'role_id'=>$request->idRole]);
+        
         return response()->json(['check' => true, 'msg' => 'Đăng Ký Thành Công']);
     }
 
