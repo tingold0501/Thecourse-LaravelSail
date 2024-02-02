@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Mail\MailCreateUser;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
@@ -72,10 +73,10 @@ class UserController extends Controller
         User::create(['name'=>$request->name, 'email'=>$request->email, 'password'=>$password, 'phone'=>$request->phone, 'role_id'=>$request->idRole]);
         $mailData = [
             'name' => $request->name,
-            'email' => $request->email,
+            // 'email' => $request->email,
             'password' => $password,
         ];
-        Mail::to($request->email)->send(new UserMail($mailData));
+        Mail::to($request->email)->send(new MailCreateUser($mailData));
         return response()->json(['check' => true, 'msg' => 'Đăng Ký Thành Công']);
     }
 
