@@ -29,6 +29,8 @@ Route::controller(UserController::class)->group(function () {
     Route::post('updateStatusUser', 'updateStatus');
     Route::post('updateEmailUser', 'updateEmail');
     Route::post('updatePhonelUser', 'updatePhone');
+    Route::post('loginTeacher', 'loginTeacher');
+
 });
 
 Route::controller(RoleController::class)->group(function () {
