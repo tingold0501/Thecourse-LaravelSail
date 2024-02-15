@@ -51,6 +51,7 @@ class RoleController extends Controller
         }
         Role::create(['name'=>$request->name]);
         return response()->json(['check' => true, 'msg' => 'Thêm Loại Tài Khoản Thành Công']);
+    
     }
 
     public function updateName(Request $request,Role $role){

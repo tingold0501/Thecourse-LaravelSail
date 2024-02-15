@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\RoleController;
+use App\Http\Controllers\EduController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -41,4 +42,9 @@ Route::controller(RoleController::class)->group(function () {
     Route::post('addARole', 'create');
     Route::post('updateNameRole', 'updateName');
     Route::post('updateStatusRole', 'updateStatus');
+});
+
+Route::controller(EduController::class)->group(function () {
+    Route::get('getAllDataEdu', 'index');
+    Route::post('createEdu', 'create');
 });
