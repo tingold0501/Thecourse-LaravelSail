@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Edu;
+use App\Models\Cate;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
@@ -102,11 +103,11 @@ class EduController extends Controller
         if ($validator->fails()) {
             return response()->json(['check' => false, 'msg' => $validator->errors()]);
         }
-        $check= CateM::where('idEdu',$request->id)->count('id');
+        $check= Cate::where('edu_id',$request->id)->count('id');
         if($check!=0){
             return response()->json(['check'=>false,'msg'=>'Loại hình giáo dục có lớp']);
         }
-        EduM::where('id',$request->id)->delete();
+        Edu::where('id',$request->id)->delete();
         $result = $this->getData();
         return response()->json(['check'=>true,'edu'=>$result]);
     }

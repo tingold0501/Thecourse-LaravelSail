@@ -5,6 +5,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\EduController;
+use App\Http\Controllers\CateController;
+use App\Http\Controllers\CourseController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -51,4 +53,12 @@ Route::controller(EduController::class)->group(function () {
     Route::post('ediEdu', 'editEdu');
     Route::post('switchEdu', 'switchEdu');
     Route::post('deleteEdu', 'deleteEdu');
+});
+
+Route::controller(CateController::class)->group(function () {
+    Route::get('getAllDataCate', 'index');
+});
+
+Route::controller(CourseController::class)->group(function () {
+    Route::get('getAllDataCourse', 'index');
 });

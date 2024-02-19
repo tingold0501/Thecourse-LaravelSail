@@ -15,10 +15,10 @@ return new class extends Migration
             $table->id();
             $table->string('name')->unique();
             $table->string('summary');
-            $table->bigInteger('price');
+            // $table->bigInteger('price');
             $table->string('image');
             $table->bigInteger('discount');
-            $table->bigInteger('duration');
+            // $table->bigInteger('duration');
             $table->string('Grade');
             $table->boolean('status')->default(1);
             $table->text('detail');
