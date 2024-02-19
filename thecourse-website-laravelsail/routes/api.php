@@ -7,6 +7,7 @@ use App\Http\Controllers\RoleController;
 use App\Http\Controllers\EduController;
 use App\Http\Controllers\CateController;
 use App\Http\Controllers\CourseController;
+use App\Http\Controllers\BillController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -62,3 +63,7 @@ Route::controller(CateController::class)->group(function () {
 Route::controller(CourseController::class)->group(function () {
     Route::get('getAllDataCourse', 'index');
 });
+Route::controller(BillController::class)->group(function () {
+    Route::get('getAllDataBill', 'index');
+});
+
