@@ -46,5 +46,9 @@ Route::controller(RoleController::class)->group(function () {
 
 Route::controller(EduController::class)->group(function () {
     Route::get('getAllDataEdu', 'index');
+    Route::get('getActiveEdu', 'activeEdu');
     Route::post('createEdu', 'create');
+    Route::post('ediEdu', 'editEdu');
+    Route::post('switchEdu', 'switchEdu');
+    Route::post('deleteEdu', 'deleteEdu');
 });
