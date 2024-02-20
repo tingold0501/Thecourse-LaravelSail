@@ -62,6 +62,8 @@ Route::controller(CateController::class)->group(function () {
 
 Route::controller(CourseController::class)->group(function () {
     Route::get('getAllDataCourse', 'index');
+    Route::post('createCourse', 'createCourse');
+    Route::post('addPrice', 'addPrice');
 });
 Route::controller(BillController::class)->group(function () {
     Route::get('getAllDataBill', 'index');
