@@ -15,11 +15,11 @@ class CourseController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
-    {
-        $courses = DB::table('courses')->get();
-        return response()->json($courses);
-    }
+    // public function index()
+    // {
+    //     $courses = DB::table('courses')->get();
+    //     return response()->json($courses);
+    // }
 
     public function getCoursesCate($id){
         $result = DB::table('course_cates')->where('edu_id',$id)->get();
@@ -97,6 +97,112 @@ class CourseController extends Controller
         return response()->json(['check'=>true,'result'=>$result]);
     
     }
+
+    public function switchCate(Request $request){
+        $validator =  Validator::make(
+            $request->all(),
+            [
+                'status' => 'required|min:0|max:1',
+                'id'=>'required|numeric|exists:course_cates,id',
+            ],
+            [
+                'status.required' => 'Thiếu mã trạng thái loại hình lớp học',
+                'status.min|status.max'=>'Mã trạng thái không hợp lệ',
+                'id.required'=>'Thiếu mã loại hình lớp học',
+                'id.exists'=>'Mã loại hình lớp học không tồn tại',
+            ],
+        );
+        if ($validator->fails()) {
+            return response()->json(['check' => false, 'msg' => $validator->errors()]);
+        }
+        Cate::where('id',$request->id)->update(['status'=>$request->status,'updated_at'=>now()]);
+        $idEdu = Cate::where('id',$request->id)->value('edu_id');
+        $result = $this->getCourseCate($idEdu);
+        return  response()->json(['check'=>true,'result'=>$result]);
+    }
+    public function activeCate(){
+        $result = Cate::where('status',1)->select('id','name')->get();
+        return response()->json($result);
+    }
+    public function editCourseCate(Request $request){
+        $validator =  Validator::make(
+            $request->all(),
+            [
+                'name' => 'required',
+                'id'=>'required|numeric|exists:course_cates,id',
+            ],
+            [
+                'name.required' => 'Thiếu tên loại hình lớp học',
+                'id.required'=>'Thiếu mã loại hình lớp học',
+                'id.exists'=>'Mã loại hình lớp học không tồn tại',
+            ],
+        );
+        if ($validator->fails()) {
+            return response()->json(['check' => false, 'msg' => $validator->errors()]);
+        }
+        Cate::where('id',$request->id)->update(['name'=>$request->name,'updated_at'=>now()]);
+        $idEdu = Cate::where('id',$request->id)->value('edu_id');
+        $result = $this->getCourseCate($idEdu);
+        return  response()->json(['check'=>true,'result'=>$result]);
+    }
+    public function DelCate(Request $request){
+        $validator =  Validator::make(
+            $request->all(),
+            [
+                'idD'=>'required|exists:course_cates,id',
+            ],
+            [
+                'idD.required'=>'Thiếu mã loại hình lớp học',
+                'idD.exists'=>'Mã loại hình lớp học không tồn tại',
+            ],
+        );
+        if ($validator->fails()) {
+            return response()->json(['check' => false, 'msg' => $validator->errors()]);
+        }
+        $idEdu = Cate::where('id',$request->idD)->value('edu_id');
+        $check= Course::where('course_cate_id',$request->idD)->count('id');
+        if($check!=0){
+            return response()->json(['check'=>false,'msg'=>'Có khoá học trong loại này']);
+        }
+        $idEdu = Cate::where('id',$request->idD)->value('edu_id');
+        Cate::where('id',$request->idD)->delete();
+        $result =  DB::Table('course_cates')->where('edu_id',$idEdu)->get();
+
+        return  response()->json(['check'=>true,'result'=>$result]);
+    }
+    public function createCourseCate(Request $request){
+        $validator =  Validator::make(
+            $request->all(),
+            [
+                'name' => 'required',
+                'idEdu'=>'required|exists:edus,id',
+            ],
+            [
+                'name.required' => 'Thiếu tên loại hình lớp học',
+                'idEdu.required'=>'Thiếu mã loại hình giáo dục',
+                'idEdu.exists'=>'Mã loại hình giáo dục không tồn tại',
+            ],
+        );
+        if ($validator->fails()) {
+            return response()->json(['check' => false, 'msg' => $validator->errors()]);
+        }
+        Cate::create(['name'=>$request->name,'edu_id'=>$request->idEdu]);
+        $result = $this->getCourseCate($request->idEdu);
+        return  response()->json(['check'=>true,'result'=>$result]);
+    }
+    public function index($id)
+    {
+        $result = $this->getCourseCate($id);
+        return response()->json($result);
+    }
+    public function getCourse($id){
+        $result = DB::Table('courses')->where('course_cate_id',$id)->get();
+        return $result;
+    }
+    public function getAdminCourses (){
+        $result= $this->getCourse();
+        return response()->json($result);
+    }
     //======================
     public function createCourse(Request $request){
         $validator =  Validator::make(
@@ -132,6 +238,124 @@ class CourseController extends Controller
         $result = $this->getCourse($request->course_cate_id);
         return  response()->json(['check'=>true,'result'=>$result]);
     
+    }
+    public function switchCourse (Request $request){
+        $validator =  Validator::make(
+            $request->all(),
+            [
+                'id'=>'required|exists:courses,id',
+                'status'=>'required|numeric|min:0|max:1',
+            ],
+            [
+                'id.required'=>'Thiếu mã khoá học',
+                'id.exists'=>'Mã khoá học không tồn tại',
+                'status.required'=>'Thiếu trạng thái khoá học',
+                'status.numeric'=>'Trạng thái khoá học không hợp lệ',
+                'status.max'=>'Trạng thái khoá học không hợp lệ',
+                'status.max'=>'Trạng thái khoá học không hợp lệ',
+            ],
+        );
+        if ($validator->fails()) {
+            return response()->json(['check' => false, 'msg' => $validator->errors()]);
+        }
+        Course::where('id',$request->id)->update(['status'=>$request->status,'updated_at'=>now()]);
+        $idCate=  Course::where('id',$request->id)->value('course_cate_id');
+        $result = $this->getCourse($idCate);
+        return  response()->json(['check'=>true,'result'=>$result]);
+    }
+    public function editcourse(Request $request)
+    {
+        $validator =  Validator::make(
+            $request->all(),
+            [
+                'id'=>'required|exists:courses,id',
+                'coursename' => 'required',
+                'summary'=>'required',
+                'grade'=>'required',
+                'idCate'=>'required|exists:course_cates,id',
+                'module'=>'required',
+            ],
+            [
+                'id.required'=>'Thiếu mã khoá học',
+                'id.exists'=>'Mã khoá học không tồn tại',
+                'coursename.required' => 'Thiếu tên khoá học',
+                'coursename.unique' => 'Tên khoá học bị trùng',
+                'summary.required' => 'Thiếu tóm tắt nội dung khoá học',
+                'grade.required' => 'Thiếu khối lớp của khoá học',
+                'idCate.required' => 'Thiếu mã loại hình lớp',
+                'idCate.exists' => 'Mã loại hình lớp không tồn tại',
+                'module.required'=>'Thiếu module khoá học',
+            ],
+        );
+        if ($validator->fails()) {
+            return response()->json(['check' => false, 'msg' => $validator->errors()]);
+        }
+        Course::where('id',$request->id)->update(['name'=>$request->coursename,'summary'=>$request->summary,
+        'discount'=>$request->discount,'course_cate_id'=>$request->idCate,'Grade'=>$request->grade,'detail'=>$request->module]);
+        $idCate=  Course::where('id',$request->id)->value('course_cate_id');
+        $result = $this->getCourse($idCate);
+        return  response()->json(['check'=>true,'result'=>$result]);
+    }
+    public function editFileCourse(Request $request)
+    {
+        $validator =  Validator::make(
+            $request->all(),
+            [
+                'id'=>'required|exists:courses,id',
+                'coursename' => 'required',
+                'summary'=>'required',
+                'grade'=>'required',
+                'idCate'=>'required|exists:course_cates,id',
+                'module'=>'required',
+                'file'=>'required|mimes:gif,jpeg,png,webp,jpg,JPG,jfif,GIF,JPEG,PNG,WEBP',
+            ],
+            [
+                'id.required'=>'Thiếu mã khoá học',
+                'id.exists'=>'Mã khoá học không tồn tại',
+                'coursename.required' => 'Thiếu tên khoá học',
+                'coursename.unique' => 'Tên khoá học bị trùng',
+                'summary.required' => 'Thiếu tóm tắt nội dung khoá học',
+                'grade.required' => 'Thiếu khối lớp của khoá học',
+                'idCate.required' => 'Thiếu mã loại hình lớp',
+                'idCate.exists' => 'Mã loại hình lớp không tồn tại',
+                'file.required' => 'Thiếu hình ảnh khoá học',
+                'module.required'=>'Thiếu module khoá học',
+                'file.required' => 'Thiếu hình ảnh khoá học',
+                'file.mimes' => 'Hình ảnh khoá học không hợp lệ',
+
+            ],
+        );
+        if ($validator->fails()) {
+            return response()->json(['check' => false, 'msg' => $validator->errors()]);
+        }
+        $filenameold=Course::where('id',$request->id)->value('image');
+        $check = Course::where('image',$filenameold)->where('id','!=',$request->id)->count('id');
+        $filename=$_FILES['file']['name'];
+        $file_tmp=$_FILES['file']['tmp_name'];
+        if($check==0){
+            File::delete(public_path("images/".$filenameold));
+        }else{
+            $temp = explode(".", $_FILES['file']['name']);
+            $filename = $_FILES['file']['name'].random_int(1,9). '.' . end($temp);
+        }
+        move_uploaded_file($file_tmp,'images/'.$filename);
+        Course::where('id',$request->id)->update(['name'=>$request->coursename,'summary'=>$request->summary,'image'=>$filename,
+        'discount'=>$request->discount,'course_cate_id'=>$request->idCate,'Grade'=>$request->grade,'detail'=>$request->module]);
+        $result = $this->getCourse($request->idCate);
+        return  response()->json(['check'=>true,'result'=>$result]);
+    }
+    public function singleCourse($id){
+        $result = Course::where('id',$id)->first();
+        return response()->json($result);
+    }
+    /**
+     * Store a newly created resource in storage.
+     */
+    public function singleCourse1($id)
+    {
+        $result = Course::where('id',$id)->first();
+        $duration =Duration::where('course_id',$id)->get();
+        return response()->json(['course'=>$result,'duration'=>$duration]);
     }
     /**
      * Show the form for creating a new resource.
