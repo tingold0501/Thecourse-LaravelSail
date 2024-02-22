@@ -45,6 +45,7 @@ Route::controller(RoleController::class)->group(function () {
     Route::post('addARole', 'create');
     Route::post('updateNameRole', 'updateName');
     Route::post('updateStatusRole', 'updateStatus');
+    Route::post('deleteRole', 'destroy');
 });
 
 Route::controller(EduController::class)->group(function () {

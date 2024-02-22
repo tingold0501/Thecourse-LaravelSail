@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Role;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
@@ -124,8 +125,26 @@ class RoleController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Role $role)
+    public function destroy(Request $request,Role $role)
     {
-        //
+        $validator = Validator::make($request->all(), [
+            'id'=>'required|exists:roles,id',
+        ],[
+            'id.required'=>'Thiếu mã loại tài khoản',
+            'id.exists'=>'Mã loại tài khoản không hợp lệ',
+        ]);
+        if ($validator->fails()) {
+             return response()->json(['check'=>false, 'msg' => $validator->errors()]);
+        }
+        $check=User::where('role_id',$request->id)->count('id');
+        if($check!=0){
+            return response()->json(['check'=>false,'msg'=>'Có tài khoản tồn tại trong loại này']);
+        }
+        if($request->id ==1||$request->id==2||$request->id==3){
+             return response()->json(['check'=>false,'msg'=>'Không được xoá']);
+        }
+        Role::where('id',$request->id)->delete();
+        return response()->json(['check'=>true,'msg'=>'Xoá Loại Tài Tài Khoản Thành Công']);
+
     }
 }
