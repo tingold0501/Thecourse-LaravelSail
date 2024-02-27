@@ -68,7 +68,7 @@ class RoleController extends Controller
         if ($validator->fails()) {
             return response()->json(['check' => false, 'msg' => $validator->errors()]);
         }
-        Role::where('id', $request->id)->update(['name'=>$request->name]);
+        Role::where('id', $request->id)->where('id', '>', 3)->update(['name'=>$request->name]);
         return response()->json(['check' => true, 'msg'=>'Tên Loại Đã Được Sửa']);
     }
 

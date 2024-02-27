@@ -43,6 +43,30 @@ class UserController extends Controller
         return response()->json($teachers);
     }
 
+    public function loginAdmin(Request $request, User $user){
+        $validator = Validator::make(
+            $request->all(),
+            [
+                'password' => 'required',
+                'email' => 'required|email|exists:users,email',
+            ],
+            [
+                'password.required' => 'Thiếu mật khẩu tài khoản',
+                'email.required' => 'Thiếu email tài khoản',
+                'email.email' => 'Email tài khoản không hợp lệ',
+                'email.exists' => 'Email tài khoản không tồn tại',
+            ],
+        );
+        if ($validator->fails()) {
+            return response()->json(['check' => false, 'msg' => $validator->errors()]);
+        }
+        if(Auth::attempt(['email' => $request->email, 'password' =>  $request->password,'status'=>1,'role_id'=>1],true)){
+            return response()->json(['check'=>true,'token'=>Auth::user()->remember_token]);
+        }else{
+            return response()->json(['check'=>false,'msg'=>'Tài khoàn đăng nhập không hợp lệ']);
+        }
+    }
+
     /**
      * Show the form for creating a new resource.
      */
