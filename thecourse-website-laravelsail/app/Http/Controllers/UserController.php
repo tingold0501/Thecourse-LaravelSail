@@ -117,8 +117,8 @@ class UserController extends Controller
         $password = random_int(111111,999999);
         User::create(['name'=>$request->name, 'email'=>$request->email, 'password'=>$password, 'phone'=>$request->phone, 'role_id'=>$request->idRole]);
         $mailData = [
-            'name' => $request->name,
-            // 'email' => $request->email,
+            // 'name' => $request->name,
+            'email' => $request->email,
             'password' => $password,
         ];
         Mail::to($request->email)->send(new MailCreateUser($mailData));
