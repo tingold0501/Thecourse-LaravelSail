@@ -11,6 +11,10 @@ class BillController extends Controller
     /**
      * Display a listing of the resource.
      */
+    public function getSumBill(){
+        $result = DB::table('bills')->where('status',1)->count();
+        return response()->json($result);
+    }
     public function index()
     {
         $result= DB::Table('bills')

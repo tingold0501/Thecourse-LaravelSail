@@ -21,6 +21,11 @@ class CourseController extends Controller
     //     return response()->json($courses);
     // }
 
+    public function getSumCourse(){
+        $result = DB::table('courses')->where('status',1)->count();
+        return response()->json($result);
+    }
+
     public function getCoursesCate($id){
         $result = DB::table('course_cates')->where('edu_id',$id)->get();
         return $result;

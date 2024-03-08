@@ -39,7 +39,7 @@ class UserController extends Controller
         $teachers = DB::table('users')
         ->join('roles','users.role_id', '=', 'roles.id')
         ->where('roles.name','=','Teacher')
-        ->get();
+        ->count();
         return response()->json($teachers);
     }
 
@@ -61,7 +61,7 @@ class UserController extends Controller
             return response()->json(['check' => false, 'msg' => $validator->errors()]);
         }
         if(Auth::attempt(['email' => $request->email, 'password' =>  $request->password,'status'=>1,'role_id'=>1],true)){
-            return response()->json(['check'=>true,'token'=>Auth::user()->remember_token]);
+            return response()->json(['check'=>true,'token'=>Auth::user()->remember_token, 'msg'=>'Admin Đăng Nhập Thành Công']);
         }else{
             return response()->json(['check'=>false,'msg'=>'Tài khoàn đăng nhập không hợp lệ']);
         }
