@@ -61,6 +61,10 @@ class CourseController extends Controller
         $result = DB::table('courses')->where('status',1)->select('id','name')->get();
         return response()->json($result);
     }
+    public function index1(){
+        $result = DB::table('courses')->where('status',1)->get();
+        return response()->json($result);
+    }
     //====================================================
     public function getCoursePrice($id){
         $result =$this->getDuration($id);

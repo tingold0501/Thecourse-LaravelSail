@@ -64,7 +64,7 @@ Route::controller(CateController::class)->group(function () {
 });
 
 Route::controller(CourseController::class)->group(function () {
-    Route::get('getAllDataCourse', 'index');
+    Route::get('getAllDataCourse', 'index1');
     Route::post('createCourse', 'createCourse');
     Route::post('addPrice', 'addPrice');
     Route::get('getSumCourse', 'getSumCourse');
