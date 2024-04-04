@@ -15,12 +15,15 @@ class CourseController extends Controller
     /**
      * Display a listing of the resource.
      */
-    // public function index()
-    // {
-    //     $courses = DB::table('courses')->get();
-    //     return response()->json($courses);
-    // }
-
+    public function getAllCourse(){
+        $result = DB::table('courses')->where('status',1)->get();
+        return response()->json($result);
+    }
+    public function getLatestCourses()
+    {
+        $latestCourse = DB::table('courses')->where('status',1)->orderBy('id','desc')->take(4)->get();
+        return response()->json($latestCourse);
+    }
     public function getSumCourse(){
         $result = DB::table('courses')->where('status',1)->count();
         return response()->json($result);
@@ -61,10 +64,7 @@ class CourseController extends Controller
         $result = DB::table('courses')->where('status',1)->select('id','name')->get();
         return response()->json($result);
     }
-    public function index1(){
-        $result = DB::table('courses')->where('status',1)->get();
-        return response()->json($result);
-    }
+    
     //====================================================
     public function getCoursePrice($id){
         $result =$this->getDuration($id);
