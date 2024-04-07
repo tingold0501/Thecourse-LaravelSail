@@ -137,7 +137,7 @@ class UserController extends Controller
         if ($validator->fails()) {
             return response()->json(['check' => false, 'msg' => $validator->errors()]);
         }
-        User::where('id',$request->id)->update(['name'=>$request->name]);
+        User::where('id',$request->id)->update(['name'=>$request->name, 'updated_at'=>now()]);
         return response()->json(['check'=>true, 'msg'=>'Cập Nhập Thành Công']);
     }
 
@@ -152,6 +152,9 @@ class UserController extends Controller
             'status.max' => 'Trạng Thái Vượt Quá Mức Quy Định',
             'status.min' => 'Trạng Thái Bé Quá Mực Quy Định',
         ]);
+        if ($validator->fails()) {
+            return response()->json(['check' => false, 'msg' => $validator->errors()]);
+        }
         User::where('id',$request->id)->update(['status'=>$request->status]);
         return response()->json(['check'=>true, 'msg'=>'Cập Nhập Thành Công']);
     
@@ -168,6 +171,9 @@ class UserController extends Controller
             'email.email' => 'Email Không Đúng Định Dạng Email',
             'email.unique' => 'Email Đã Tồn Tại',
         ]);
+        if ($validator->fails()) {
+            return response()->json(['check' => false, 'msg' => $validator->errors()]);
+        }
         User::where('id',$request->id)->update(['email'=>$request->email]);
         return response()->json(['check'=>true, 'msg'=>'Cập Nhập Thành Công']);
     
