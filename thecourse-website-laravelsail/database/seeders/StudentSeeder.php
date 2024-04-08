@@ -16,6 +16,7 @@ class StudentSeeder extends Seeder
     {
         DB::table('students')->insert([
             "name" => "Phạm Huỳnh Tín",
+            "avatar" => "https://i.pinimg.com/564x/e8/9d/29/e89d292e76d2ffee19e7f17f7f9c6734.jpg",
             "password" => Hash::make("123"),
             "email" => "phamhuynhtin050120@gmail.com",
             "phone" => "0981651108",

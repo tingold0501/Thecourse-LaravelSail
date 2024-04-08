@@ -15,8 +15,13 @@ class CourseController extends Controller
     /**
      * Display a listing of the resource.
      */
+    
     public function getAllCourse(){
-        $result = DB::table('courses')->where('status',1)->get();
+        $result = DB::table('courses')
+        ->join('courses_durations','courses.id','=','courses_durations.course_id')
+        ->join('proccesses','courses.id','=','proccesses.course_id')
+        ->select('courses.*','proccesses.pass','courses_durations.price')
+        ->get();
         return response()->json($result);
     }
     public function getLatestCourses()

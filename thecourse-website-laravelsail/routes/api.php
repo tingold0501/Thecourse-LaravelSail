@@ -9,6 +9,7 @@ use App\Http\Controllers\CateController;
 use App\Http\Controllers\CourseController;
 use App\Http\Controllers\BillController;
 use App\Http\Controllers\CustomerController;
+use App\Http\Controllers\StudentController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -78,5 +79,10 @@ Route::controller(CustomerController::class)->group(function () {
     Route::get('getAllDataCustomer', 'index');
     Route::post('createCustomer', 'create');
     Route::post('loginCustomer', 'loginCustomer');
+});
+
+Route::controller(StudentController::class)->group(function () {
+    Route::get('getAllDataStudent', 'index');
+    
 });
 
