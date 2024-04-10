@@ -70,6 +70,8 @@ Route::controller(CourseController::class)->group(function () {
     Route::post('createCourse', 'createCourse');
     Route::post('addPrice', 'addPrice');
     Route::get('getSumCourse', 'getSumCourse');
+    Route::get('singleCourseUser/{id}', 'singleCourseUser');
+    Route::get('course/{id}', 'getCourse');
 });
 Route::controller(BillController::class)->group(function () {
     Route::get('getAllDataBill', 'index');
