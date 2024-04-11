@@ -37,6 +37,8 @@ Route::controller(UserController::class)->group(function () {
     Route::post('updatePhonelUser', 'updatePhone');
     Route::post('loginTeacher', 'loginTeacher');
     Route::post('loginAdmin', 'loginAdmin');
+    Route::post('delete', 'delete');
+    Route::post('updateRole', 'updateRole');
 
 });
 

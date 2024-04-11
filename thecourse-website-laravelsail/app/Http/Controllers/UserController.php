@@ -125,6 +125,25 @@ class UserController extends Controller
         return response()->json(['check' => true, 'msg' => 'Đăng Ký Thành Công']);
     }
 
+    public function updateRole(Request $request, User $user){
+        $validator = Validator::make($request->all(), [
+            'id' => 'required|exists:users,id',
+            'idRole' => 'required|exists:roles,id',
+        ],[
+            'id.required' => 'Mã Người Dùng Không Được Trống',
+            'id.exists' => 'Mã Người Dùng Không Tồn Tại',
+            'idRole.required' => 'Mã Loại Không Được Trống',
+            'idRole.exists' => 'Mã Loại Không Tồn Tại',
+        ]);
+ 
+        if ($validator->fails()) {
+            return response()->json(['check' => false, 'msg' => $validator->errors()]);
+        }
+        User::where('id',$request->id)->update(['role_id'=>$request->idRole, 'updated_at'=>now()]);
+        return response()->json(['check'=>true, 'msg'=>'Cập Nhập Thành Công']);
+   
+    }
+
     public function updateName(Request $request, User $user){
         $validator = Validator::make($request->all(), [
             'id' => 'required|exists:users,id',
@@ -139,6 +158,7 @@ class UserController extends Controller
         }
         User::where('id',$request->id)->update(['name'=>$request->name, 'updated_at'=>now()]);
         return response()->json(['check'=>true, 'msg'=>'Cập Nhập Thành Công']);
+   
     }
 
     public function updateStatus(Request $request, User $user){
@@ -179,6 +199,20 @@ class UserController extends Controller
     
     }
 
+    public function delete(Request $request, User $user){
+        $validator = Validator::make($request->all(), [
+            'id' => 'required|exists:users,id',
+        ],[
+            'id.required' => 'Mã Người Không Được Trống',
+            'id.exists' => 'Mã Không Tồn Tại',
+        ]);
+        if ($validator->fails()) {
+            return response()->json(['check' => false, 'msg' => $validator->errors()]);
+        }
+        User::where('id',$request->id)->delete();
+        return response()->json(['check'=>true, 'msg'=>'Xóa Thành Công']);
+    }
+
 
     public function updatePhone(Request $request, User $user){
         $validator = Validator::make($request->all(), [
@@ -191,6 +225,9 @@ class UserController extends Controller
             'phone.unique' => 'Số Điện Thoại Đã Tồn Tại',
             
         ]);
+        if ($validator->fails()) {
+            return response()->json(['check' => false, 'msg' => $validator->errors()]);
+        }
         User::where('id',$request->id)->update(['phone'=>$request->phone]);
         return response()->json(['check'=>true, 'msg'=>'Cập Nhập Thành Công']);
     }
