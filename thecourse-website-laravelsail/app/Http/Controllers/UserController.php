@@ -18,7 +18,6 @@ class UserController extends Controller
     {
         $users = DB::table('users')->get();
         return response()->json($users);
-        dd($user);
     }
 
     public function indexActive(){
