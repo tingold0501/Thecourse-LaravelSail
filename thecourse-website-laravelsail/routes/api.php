@@ -24,8 +24,9 @@ use App\Http\Controllers\StudentController;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+
 Route::controller(UserController::class)->group(function () {
-    Route::get('getAllDataUser', 'index');
     Route::get('getAllActiveUser', 'indexActive');
     Route::get('getAllNewUser', 'getAllNewUser');
     Route::get('getSumUser', 'getSumUsers');
