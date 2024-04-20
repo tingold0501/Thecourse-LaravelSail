@@ -24,6 +24,7 @@ class CourseSeeder extends Seeder
             Khoá học này sử dụng phương pháp giảng dạy linh hoạt và thú vị, tập trung vào việc áp dụng lý thuyết vào các dự án thực tế. Học viên sẽ có cơ hội thực hành thông qua các bài tập và dự án lập trình, từ đó xây dựng khả năng giải quyết vấn đề và logic lập trình.
             Đồng thời, khoá học cũng nhấn mạnh việc phát triển kỹ năng làm việc nhóm và giao tiếp, tạo cơ hội cho học viên thảo luận, chia sẻ kinh nghiệm và hỗ trợ lẫn nhau trong quá trình học.
             Kết thúc khoá học, học viên sẽ có kiến thức cơ bản vững về lập trình và sẵn sàng để tham gia vào các dự án phức tạp hơn trong tương lai.",
+            "created_at" => now(),
             "course_cate_id" => "1",
         ]);
     }

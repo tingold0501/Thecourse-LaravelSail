@@ -28,6 +28,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 Route::controller(UserController::class)->group(function () {
     Route::get('getAllActiveUser', 'indexActive');
+    Route::get('getAllDataUser', 'index');
     Route::get('getAllNewUser', 'getAllNewUser');
     Route::get('getSumUser', 'getSumUsers');
     Route::get('getTeacher', 'getTeacher');
