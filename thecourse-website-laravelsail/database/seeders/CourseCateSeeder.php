@@ -14,10 +14,14 @@ class CourseCateSeeder extends Seeder
     public function run(): void
     {
         DB::table('course_cates')->insert([
-            "name" => "Lập Trình Dưới 18 Tuổi",
+            ["name" => "Lập Trình Dưới 18 Tuổi",
             "created_at"=>now(),
             "updated_at"=>now(),
-            "edu_id" => "1",
+            "edu_id" => "1"],
+            ["name" => "Cơ sở lý thuyết về mạng máy tính",
+            "created_at"=>now(),
+            "updated_at"=>now(),
+            "edu_id" => "1"],
         ]);
     }
 }
