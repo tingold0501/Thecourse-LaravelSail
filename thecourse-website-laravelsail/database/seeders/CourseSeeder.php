@@ -25,6 +25,7 @@ class CourseSeeder extends Seeder
             Đồng thời, khoá học cũng nhấn mạnh việc phát triển kỹ năng làm việc nhóm và giao tiếp, tạo cơ hội cho học viên thảo luận, chia sẻ kinh nghiệm và hỗ trợ lẫn nhau trong quá trình học.
             Kết thúc khoá học, học viên sẽ có kiến thức cơ bản vững về lập trình và sẵn sàng để tham gia vào các dự án phức tạp hơn trong tương lai.",
             "created_at" => now(),
+            "updated_at" => now(),
             "course_cate_id" => "1",
         ]);
     }

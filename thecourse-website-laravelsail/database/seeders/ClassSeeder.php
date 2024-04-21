@@ -15,6 +15,8 @@ class ClassSeeder extends Seeder
     {
         DB::table('classes')->insert([
             "schedule" => "08:00 - 09:30 AM | Buổi học Lập trình cơ bản ",
+            "created_at"=>now(),
+            "updated_at"=>now(),
             "user_id" => "1",
             "course_id" => "1",
         ]);

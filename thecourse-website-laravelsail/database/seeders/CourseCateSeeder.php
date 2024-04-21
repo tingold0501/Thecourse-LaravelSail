@@ -15,6 +15,8 @@ class CourseCateSeeder extends Seeder
     {
         DB::table('course_cates')->insert([
             "name" => "Lập Trình Dưới 18 Tuổi",
+            "created_at"=>now(),
+            "updated_at"=>now(),
             "edu_id" => "1",
         ]);
     }

@@ -20,7 +20,8 @@ class StudentSeeder extends Seeder
             "password" => Hash::make("123"),
             "email" => "phamhuynhtin050120@gmail.com",
             "phone" => "0981651108",
-            
+            "created_at"=>now(),
+            "updated_at"=>now(),
         ]);
     }
 }

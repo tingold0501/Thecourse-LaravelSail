@@ -371,6 +371,10 @@ class CourseController extends Controller
         $duration =Duration::where('course_id',$id)->get();
         return response()->json(['course'=>$result,'duration'=>$duration]);
     }
+    // public function activeCate(){
+    //     $result = CourseCateM::where('status',1)->select('id','name')->get();
+    //     return response()->json($result);
+    // }
     /**
      * Show the form for creating a new resource.
      */

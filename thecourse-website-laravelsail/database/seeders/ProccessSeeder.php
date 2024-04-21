@@ -18,6 +18,8 @@ class ProccessSeeder extends Seeder
             "schedules" => "08:00 - 09:30 AM | Buổi học Lập trình cơ bản",
             "duration" => "10",
             "pass" => "10",
+            "created_at"=>now(),
+            "updated_at"=>now(),
             "user_id" => "1",
             "course_id" => "1",
         ]);

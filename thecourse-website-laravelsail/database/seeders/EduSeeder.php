@@ -15,6 +15,8 @@ class EduSeeder extends Seeder
     {
         DB::table('edus')->insert([
             "name" => "Lập Trình",
+            "created_at"=>now(),
+            "updated_at"=>now(),
         ]);
     }
 }

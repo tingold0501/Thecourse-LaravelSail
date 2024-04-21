@@ -17,6 +17,8 @@ class BillSeeder extends Seeder
             "name" => "Thanh Toán Khoá Học Lập Trình Website Dưới 18 Tuổi",
             "email" => "phamhuynhtin050120@gmail.com",
             "phone" => "0981651106",
+            "created_at"=>now(),
+            "updated_at"=>now(),
             "classe_id" => "1",
             "courses_duration_id" => "1",
         ]);

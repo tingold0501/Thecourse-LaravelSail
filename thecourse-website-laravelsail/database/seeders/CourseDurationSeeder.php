@@ -16,6 +16,8 @@ class CourseDurationSeeder extends Seeder
         DB::table('courses_durations')->insert([
             "duration" => "6",
             "price" => "20000000",
+            "created_at"=>now(),
+            "updated_at"=>now(),
             "course_id" => "1",
         ]);
     }

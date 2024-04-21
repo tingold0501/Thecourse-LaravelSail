@@ -20,6 +20,8 @@ class UserSeeder extends Seeder
             "email" => "huynhtin0501@gmail.com",
             "password" => Hash::make("123"),
             "phone" => "0981651106",
+            "created_at"=>now(),
+            "updated_at"=>now(),
             "role_id" => "1"
         ]);
     }
