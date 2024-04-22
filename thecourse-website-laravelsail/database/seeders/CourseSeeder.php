@@ -16,9 +16,9 @@ class CourseSeeder extends Seeder
         DB::table('courses')->insert([
             "name" => "Lập Trình Website",
             "summary" => "Khoá học lập trình dành cho đối tượng dưới 18 tuổi",
-            "image" => "https://codestar.vn/wp-content/uploads/2022/05/lam-quen-voi-lap-trinh-web-1.png",
+            "image" => "http://localhost/images/ce57824d38e7921c16e0c621c13fedd6.jpg",
             "discount" => "20",
-            "Grade" => "1",
+            "Grade" => "K20GD-01",
             "detail" => "
             Khoá học lập trình dành cho đối tượng dưới 18 tuổi tập trung vào việc giới thiệu và phát triển kỹ năng lập trình cơ bản. Học viên sẽ bắt đầu với các khái niệm cơ bản như biến, điều kiện, và vòng lặp, sau đó chuyển sang các khái niệm nâng cao như hàm, mảng, và đối tượng.
             Khoá học này sử dụng phương pháp giảng dạy linh hoạt và thú vị, tập trung vào việc áp dụng lý thuyết vào các dự án thực tế. Học viên sẽ có cơ hội thực hành thông qua các bài tập và dự án lập trình, từ đó xây dựng khả năng giải quyết vấn đề và logic lập trình.

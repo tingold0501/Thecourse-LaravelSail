@@ -247,6 +247,7 @@ class CourseController extends Controller
                 'summary'=>'required',
                 'grade'=>'required',
                 'course_cate_id'=>'required|exists:course_cates,id',
+                // 'detail'=>'required',
                 'file'=>'required|mimes:gif,jpeg,png,webp,jpg,JPG,jfif,GIF,JPEG,PNG,WEBP',
                 'module'=>'required'
             ],
