@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Course;
 use App\Models\Cate;
 use App\Models\Duration;
+use App\Models\Classes;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
@@ -112,6 +113,26 @@ class CourseController extends Controller
     
     }
 
+    public function deleteCourse(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'id'=>'required|exists:courses,id',
+        ],[
+            'id.required'=>'Thiếu mã khoá học',
+            'id.exists'=>'Mã khoá học không hợp lệ',
+        ]);
+        if ($validator->fails()) {
+             return response()->json(['check'=>false, 'msg' => $validator->errors()]);
+        }
+        $check=Classes::where('course_id',$request->id)->count('id');
+        if($check!=0){
+            return response()->json(['check'=>false,'msg'=>'Có khoá học đang hoàn tại trong lớp học']);
+        }
+        
+        Course::where('id',$request->id)->delete();
+        return response()->json(['check'=>true,'msg'=>'Xoá khoá học thành Thành Công']);
+
+    }
     public function switchCate(Request $request){
         $validator =  Validator::make(
             $request->all(),
