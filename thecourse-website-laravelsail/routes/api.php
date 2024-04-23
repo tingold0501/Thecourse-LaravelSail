@@ -74,6 +74,8 @@ Route::controller(CourseController::class)->group(function () {
     Route::post('createCourse', 'createCourse');
     Route::post('addPrice', 'addPrice');
     Route::post('deleteCourse', 'deleteCourse');
+    Route::post('editcourse', 'editcourse');
+    Route::post('editFileCourse', 'editFileCourse');
     Route::get('getSumCourse', 'getSumCourse');
     Route::get('activeCate', 'activeCate');
     Route::get('singleCourseUser/{id}', 'singleCourseUser');
