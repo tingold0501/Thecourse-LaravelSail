@@ -261,7 +261,8 @@ class CourseController extends Controller
                 'course_cate_id.exists' => 'Mã loại hình lớp không tồn tại',
                 'file.required' => 'Thiếu hình ảnh khoá học',
                 'file.mimes' => 'Hình ảnh khoá học không đúng định dạng',
-                'module.required'=>'Thiếu module khoá học',
+                // 'module.required'=>'Thiếu module khoá học',
+                'detail.required'=>'Thiếu chi tiết khoá học',
             ],
         );
         if ($validator->fails()) {
@@ -271,7 +272,7 @@ class CourseController extends Controller
         $file_tmp=$_FILES['file']['tmp_name'];
         move_uploaded_file($file_tmp,'images/'.$filename);
         Course::create(['name'=>$request->coursename,'summary'=>$request->summary,'image'=>$filename,
-        'discount'=>$request->discount,'course_cate_id'=>$request->course_cate_id,'Grade'=>$request->grade,'detail'=>$request->module]);
+        'discount'=>$request->discount,'course_cate_id'=>$request->course_cate_id,'Grade'=>$request->grade,'detail'=>$request->detail]);
         $result = $this->getCourse($request->course_cate_id);
         return  response()->json(['check'=>true,'result'=>$result]);
     
@@ -298,7 +299,7 @@ class CourseController extends Controller
         Course::where('id',$request->id)->update(['status'=>$request->status,'updated_at'=>now()]);
         $idCate=  Course::where('id',$request->id)->value('course_cate_id');
         $result = $this->getCourse($idCate);
-        return  response()->json(['check'=>true,'result'=>$result]);
+        return  response()->json(['check'=>true,'result'=>$result, 'msg'=>'Thêm khoá học thành công']);
     }
     public function editcourse(Request $request)
     {
