@@ -16,7 +16,7 @@ class CourseSeeder extends Seeder
         DB::table('courses')->insert([
             "name" => "Lập Trình Website",
             "summary" => "Khoá học lập trình dành cho đối tượng dưới 18 tuổi",
-            "image" => "http://localhost/images/ce57824d38e7921c16e0c621c13fedd6.jpg",
+            "image" => "86de25bf5b2b497bb8be816e43e60bc0.jpg",
             "discount" => "20",
             "Grade" => "K20GD-01",
             "detail" => "
