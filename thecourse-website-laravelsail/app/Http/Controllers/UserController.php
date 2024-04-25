@@ -137,7 +137,8 @@ class UserController extends Controller
             return response()->json(['check' => false, 'msg' => $validator->errors()]);
         }
         $password = random_int(111111,999999);
-        User::create(['name'=>$request->name, 'email'=>$request->email, 'password'=>$password, 'phone'=>$request->phone, 'role_id'=>$request->idRole]);
+        User::create(['name'=>$request->name, 'email'=>$request->email, 'password'=>$password, 
+        'phone'=>$request->phone, 'role_id'=>$request->idRole]);
         $mailData = [
             // 'name' => $request->name,
             'email' => $request->email,

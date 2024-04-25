@@ -272,7 +272,8 @@ class CourseController extends Controller
         $file_tmp=$_FILES['file']['tmp_name'];
         move_uploaded_file($file_tmp,'images/'.$filename);
         Course::create(['name'=>$request->coursename,'summary'=>$request->summary,'image'=>$filename,
-        'discount'=>$request->discount,'course_cate_id'=>$request->course_cate_id,'Grade'=>$request->grade,'detail'=>$request->detail]);
+        'discount'=>$request->discount,'course_cate_id'=>$request->course_cate_id,
+        'Grade'=>$request->grade,'detail'=>$request->detail]);
         $result = $this->getCourse($request->course_cate_id);
         return  response()->json(['check'=>true,'result'=>$result]);
     
@@ -331,7 +332,8 @@ class CourseController extends Controller
             return response()->json(['check' => false, 'msg' => $validator->errors()]);
         }
         Course::where('id',$request->id)->update(['name'=>$request->coursename,'summary'=>$request->summary,
-        'discount'=>$request->discount,'course_cate_id'=>$request->idCate,'Grade'=>$request->grade,'detail'=>$request->detail]);
+        'discount'=>$request->discount,'course_cate_id'=>$request->idCate,
+        'Grade'=>$request->grade,'detail'=>$request->detail]);
         $idCate=  Course::where('id',$request->id)->value('course_cate_id');
         $result = $this->getCourse($idCate);
         return  response()->json(['check'=>true,'result'=>$result, 'msg'=>'Cap nhap khoa hoc thanh cong']);
@@ -381,8 +383,10 @@ class CourseController extends Controller
             $filename = $_FILES['file']['name'].random_int(1,9). '.' . end($temp);
         }
         move_uploaded_file($file_tmp,'images/'.$filename);
-        Course::where('id',$request->id)->update(['name'=>$request->coursename,'summary'=>$request->summary,'image'=>$filename,
-        'discount'=>$request->discount,'course_cate_id'=>$request->idCate,'Grade'=>$request->grade,'detail'=>$request->detail]);
+        Course::where('id',$request->id)->update(['name'=>$request->coursename,
+        'summary'=>$request->summary,'image'=>$filename,
+        'discount'=>$request->discount,'course_cate_id'=>$request->idCate,
+        'Grade'=>$request->grade,'detail'=>$request->detail]);
         $result = $this->getCourse($request->idCate);
         return  response()->json(['check'=>true,'result'=>$result, 'msg'=>'Cap nhap hinh anh thanh cong 1']);
     }
