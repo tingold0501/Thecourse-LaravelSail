@@ -20,6 +20,8 @@ class UserController extends Controller
         return response()->json($users);
     }
 
+    
+
     public function indexActive(){
         $users = DB::table('users')->where('status', 1)->select()->get();
         return response()->json($users);
@@ -38,6 +40,13 @@ class UserController extends Controller
         $teachers = DB::table('users')
         ->join('roles','users.role_id', '=', 'roles.id')
         ->where('roles.name','=','Teacher')
+        ->count();
+        return response()->json($teachers);
+    }
+    public function getAdmin(){
+        $teachers = DB::table('users')
+        ->join('roles','users.role_id', '=', 'roles.id')
+        ->where('roles.name','=','Admin')
         ->count();
         return response()->json($teachers);
     }

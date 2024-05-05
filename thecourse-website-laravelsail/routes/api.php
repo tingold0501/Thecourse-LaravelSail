@@ -32,6 +32,7 @@ Route::controller(UserController::class)->group(function () {
     Route::get('getAllNewUser', 'getAllNewUser');
     Route::get('getSumUser', 'getSumUsers');
     Route::get('getTeacher', 'getTeacher');
+    Route::get('Admin', 'Admin');
     Route::post('addAUser', 'create');
     Route::post('updateNameUser', 'updateName');
     Route::post('updateStatusUser', 'updateStatus');
