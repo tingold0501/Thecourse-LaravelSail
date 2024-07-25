@@ -32,17 +32,20 @@ Route::controller(UserController::class)->group(function () {
     Route::get('getAllNewUser', 'getAllNewUser');
     Route::get('getSumUser', 'getSumUsers');
     Route::get('getTeacher', 'getTeacher');
-    Route::get('Admin', 'Admin');
+    Route::get('getAdmin', 'getAdmin');
+    Route::post('loginAdmin', 'loginAdmin');
+    Route::post('loginTeacher', 'loginTeacher');
+    Route::post('loginStudent', 'loginStudent');
+
     Route::post('addAUser', 'create');
+
+    Route::post('updateRole', 'updateRole');
     Route::post('updateNameUser', 'updateName');
     Route::post('updateStatusUser', 'updateStatus');
     Route::post('updateEmailUser', 'updateEmail');
     Route::post('updatePhonelUser', 'updatePhone');
-    Route::post('loginTeacher', 'loginTeacher');
-    Route::post('loginAdmin', 'loginAdmin');
-    Route::post('loginStudent', 'loginStudent');
+  
     Route::post('delete', 'delete');
-    Route::post('updateRole', 'updateRole');
 
 });
 
@@ -60,6 +63,8 @@ Route::controller(RoleController::class)->group(function () {
 Route::controller(EduController::class)->group(function () {
     Route::get('getAllDataEdu', 'index');
     Route::get('getActiveEdu', 'activeEdu');
+    Route::get('getDataEdus', 'getData');
+
     Route::post('createEdu', 'create');
     Route::post('ediEdu', 'editEdu');
     Route::post('switchEdu', 'switchEdu');
@@ -73,15 +78,17 @@ Route::controller(CateController::class)->group(function () {
 Route::controller(CourseController::class)->group(function () {
     Route::get('getLatestCourses', 'getLatestCourses');
     Route::get('getAllCourse', 'getAllCourse');
+    Route::get('getSumCourse', 'getSumCourse');
+    Route::get('activeCate', 'activeCate');
+    Route::get('singleCourseUser/{id}', 'singleCourseUser');
+    Route::get('course/{id}', 'singleCourse1');
+    
     Route::post('createCourse', 'createCourse');
     Route::post('addPrice', 'addPrice');
     Route::post('deleteCourse', 'deleteCourse');
     Route::post('editcourse', 'editcourse');
     Route::post('editFileCourse', 'editFileCourse');
-    Route::get('getSumCourse', 'getSumCourse');
-    Route::get('activeCate', 'activeCate');
-    Route::get('singleCourseUser/{id}', 'singleCourseUser');
-    Route::get('course/{id}', 'singleCourse1');
+   
 });
 Route::controller(BillController::class)->group(function () {
     Route::get('getAllDataBill', 'index');

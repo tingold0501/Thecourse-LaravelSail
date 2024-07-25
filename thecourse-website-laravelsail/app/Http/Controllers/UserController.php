@@ -19,9 +19,6 @@ class UserController extends Controller
         $users = DB::table('users')->get();
         return response()->json($users);
     }
-
-    
-
     public function indexActive(){
         $users = DB::table('users')->where('status', 1)->select()->get();
         return response()->json($users);
@@ -39,15 +36,13 @@ class UserController extends Controller
     public function getTeacher(){
         $teachers = DB::table('users')
         ->join('roles','users.role_id', '=', 'roles.id')
-        ->where('roles.name','=','Teacher')
-        ->count();
+        ->where('roles.name','=','Teacher')->select('users.*')->get();
         return response()->json($teachers);
     }
     public function getAdmin(){
         $teachers = DB::table('users')
         ->join('roles','users.role_id', '=', 'roles.id')
-        ->where('roles.name','=','Admin')
-        ->count();
+        ->where('roles.name','=','Admin')->select('users.*')->get();
         return response()->json($teachers);
     }
 
@@ -95,8 +90,8 @@ class UserController extends Controller
         if ($validator->fails()) {
             return response()->json(['check' => false, 'msg' => $validator->errors()]);
         }
-        if(Auth::attempt(['email' => $request->email, 'password' =>  $request->password,'status'=>1,'role_id'=>1],true)){
-            return response()->json(['check'=>true,'token'=>Auth::user()->remember_token]);
+        if(Auth::attempt(['email' => $request->email, 'password' =>  $request->password,'status'=>1,'role_id'=>3],true)){
+            return response()->json(['check'=>true,'token'=>Auth::user()->remember_token,'msg'=>'Giảng Viên Đăng Nhập Thành Công']);
         }else{
             return response()->json(['check'=>false,'msg'=>'Tài khoàn đăng nhập không hợp lệ']);
         }
@@ -118,7 +113,7 @@ class UserController extends Controller
         if ($validator->fails()) {
             return response()->json(['check' => false, 'msg' => $validator->errors()]);
         }
-        if(Auth::attempt(['email' => $request->email, 'password' =>  $request->password,'status'=>1,'role_id'=>3],true)){
+        if(Auth::attempt(['email' => $request->email, 'password' =>  $request->password,'status'=>1,'role_id'=>2],true)){
             return response()->json(['check'=>true,'token'=>Auth::user()->remember_token]);
         }else{
             return response()->json(['check'=>false,'msg'=>'Tài khoàn đăng nhập không hợp lệ']);

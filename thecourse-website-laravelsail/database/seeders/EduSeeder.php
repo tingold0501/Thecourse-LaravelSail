@@ -14,9 +14,31 @@ class EduSeeder extends Seeder
     public function run(): void
     {
         DB::table('edus')->insert([
+            [
             "name" => "Lập Trình",
             "created_at"=>now(),
             "updated_at"=>now(),
+            ],
+            [
+            "name" => "Thiết Kế",
+            "created_at"=>now(),
+            "updated_at"=>now(),
+            ], 
+            [
+            "name" => "Thiết Kế 1",
+            "created_at"=>now(),
+            "updated_at"=>now(),
+            ],
+            [
+            "name" => "Thiết Kế 2",
+            "created_at"=>now(),
+            "updated_at"=>now(),
+            ],
+            [
+            "name" => "Thiết Kế 3",
+            "created_at"=>now(),
+            "updated_at"=>now(),
+            ],
         ]);
     }
 }

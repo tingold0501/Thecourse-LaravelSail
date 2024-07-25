@@ -14,11 +14,41 @@ class ClassSeeder extends Seeder
     public function run(): void
     {
         DB::table('classes')->insert([
+            [
             "schedule" => "08:00 - 09:30 AM | Buổi học Lập trình cơ bản ",
             "created_at"=>now(),
             "updated_at"=>now(),
             "user_id" => "1",
             "course_id" => "1",
+            ],
+            [
+            "schedule" => "08:00 - 09:30 AM | Buổi học Lập trình cơ bản ",
+            "created_at"=>now(),
+            "updated_at"=>now(),
+            "user_id" => "1",
+            "course_id" => "2",
+            ],
+            [
+            "schedule" => "08:00 - 09:30 AM | Buổi học Lập trình cơ bản ",
+            "created_at"=>now(),
+            "updated_at"=>now(),
+            "user_id" => "1",
+            "course_id" => "3",
+            ],
+            [
+            "schedule" => "08:00 - 09:30 AM | Buổi học Lập trình cơ bản ",
+            "created_at"=>now(),
+            "updated_at"=>now(),
+            "user_id" => "1",
+            "course_id" => "1",
+            ],
+            [
+            "schedule" => "08:00 - 09:30 AM | Buổi học Lập trình cơ bản ",
+            "created_at"=>now(),
+            "updated_at"=>now(),
+            "user_id" => "1",
+            "course_id" => "1",
+            ],
         ]);
     }
 }

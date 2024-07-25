@@ -18,6 +18,7 @@ class RoleSeeder extends Seeder
             ["name" => "Student", "created_at" => now(), "updated_at" => now()],
             ["name" => "Teacher", "created_at" => now(), "updated_at" => now()],
             ["name" => "Customer", "created_at" => now(), "updated_at" => now()],
+            ["name" => "User", "created_at" => now(), "updated_at" => now()],
         ]);
         
     }

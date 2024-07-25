@@ -14,6 +14,7 @@ class ProccessSeeder extends Seeder
     public function run(): void
     {
         DB::table('proccesses')->insert([
+            [
             "name" => "Lập Trình",
             "schedules" => "08:00 - 09:30 AM | Buổi học Lập trình cơ bản",
             "duration" => "10",
@@ -22,6 +23,67 @@ class ProccessSeeder extends Seeder
             "updated_at"=>now(),
             "user_id" => "1",
             "course_id" => "1",
+            ],
+            [
+            "name" => "Lập Trình",
+            "schedules" => "08:00 - 09:30 AM | Buổi học Lập trình cơ bản",
+            "duration" => "10",
+            "pass" => "10",
+            "created_at"=>now(),
+            "updated_at"=>now(),
+            "user_id" => "1",
+            "course_id" => "2",
+            ],
+            [
+            "name" => "Lập Trình",
+            "schedules" => "08:00 - 09:30 AM | Buổi học Lập trình cơ bản",
+            "duration" => "10",
+            "pass" => "10",
+            "created_at"=>now(),
+            "updated_at"=>now(),
+            "user_id" => "1",
+            "course_id" => "3",
+            ],
+            [
+            "name" => "Lập Trình",
+            "schedules" => "08:00 - 09:30 AM | Buổi học Lập trình cơ bản",
+            "duration" => "10",
+            "pass" => "10",
+            "created_at"=>now(),
+            "updated_at"=>now(),
+            "user_id" => "1",
+            "course_id" => "2",
+            ],
+            [
+            "name" => "Lập Trình",
+            "schedules" => "08:00 - 09:30 AM | Buổi học Lập trình cơ bản",
+            "duration" => "10",
+            "pass" => "10",
+            "created_at"=>now(),
+            "updated_at"=>now(),
+            "user_id" => "1",
+            "course_id" => "1",
+            ],
+            [
+            "name" => "Lập Trình",
+            "schedules" => "08:00 - 09:30 AM | Buổi học Lập trình cơ bản",
+            "duration" => "10",
+            "pass" => "10",
+            "created_at"=>now(),
+            "updated_at"=>now(),
+            "user_id" => "1",
+            "course_id" => "2",
+            ],
+            [
+            "name" => "Lập Trình",
+            "schedules" => "08:00 - 09:30 AM | Buổi học Lập trình cơ bản",
+            "duration" => "10",
+            "pass" => "10",
+            "created_at"=>now(),
+            "updated_at"=>now(),
+            "user_id" => "1",
+            "course_id" => "3",
+            ],
         ]);
     }
 }

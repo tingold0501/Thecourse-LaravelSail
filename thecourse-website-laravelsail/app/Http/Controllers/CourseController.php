@@ -34,7 +34,24 @@ class CourseController extends Controller
         $result = DB::table('courses')->where('status',1)->count();
         return response()->json($result);
     }
-
+    public function activeCate(){
+        $result = Cate::where('status',1)->select('id','name')->get();
+        return response()->json($result);
+    }
+    public function singleCourseUser($id){
+        $course = DB::table('courses')->where('id',$id)->get();
+        $duration = $this->getDuration($id);
+        $class = DB::table('classes')->join('users','classes.user_id', '=', 'users.id')->where('course_id',$id)
+        ->select('classes.*','users.name')->get();
+        return response()->json(['course'=>$course, 'duration'=>$duration,'class'=>$class]);
+    }
+    public function singleCourse1($id)
+    {
+        $result = Course::where('id',$id)->first();
+        $duration =Duration::where('course_id',$id)->get();
+        return response()->json(['course'=>$result,'duration'=>$duration]);
+    }
+    
     public function getCoursesCate($id){
         $result = DB::table('course_cates')->where('edu_id',$id)->get();
         return $result;
@@ -51,13 +68,7 @@ class CourseController extends Controller
         return response()->json($result);
     }
 
-    public function singleCourseUser($id){
-        $course = DB::table('courses')->where('id',$id)->get();
-        $duration = $this->getDuration($id);
-        $class = DB::table('classes')->join('users','classes.user_id', '=', 'users.id')->where('course_id',$id)
-        ->select('classes.*','users.name')->get();
-        return response()->json(['course'=>$course, 'duration'=>$duration,'class'=>$class]);
-    }
+    
 
     public function currentCourses(){
         $result = DB::table('courses')
@@ -155,10 +166,7 @@ class CourseController extends Controller
         $result = $this->getCourseCate($idEdu);
         return  response()->json(['check'=>true,'result'=>$result]);
     }
-    public function activeCate(){
-        $result = Cate::where('status',1)->select('id','name')->get();
-        return response()->json($result);
-    }
+    
     public function editCourseCate(Request $request){
         $validator =  Validator::make(
             $request->all(),
@@ -390,23 +398,12 @@ class CourseController extends Controller
         $result = $this->getCourse($request->idCate);
         return  response()->json(['check'=>true,'result'=>$result, 'msg'=>'Cap nhap hinh anh thanh cong 1']);
     }
-    public function singleCourse($id){
-        $result = Course::where('id',$id)->first();
-        return response()->json($result);
-    }
+    
     /**
      * Store a newly created resource in storage.
      */
-    public function singleCourse1($id)
-    {
-        $result = Course::where('id',$id)->first();
-        $duration =Duration::where('course_id',$id)->get();
-        return response()->json(['course'=>$result,'duration'=>$duration]);
-    }
-    // public function activeCate(){
-    //     $result = CourseCateM::where('status',1)->select('id','name')->get();
-    //     return response()->json($result);
-    // }
+  
+  
     /**
      * Show the form for creating a new resource.
      */
