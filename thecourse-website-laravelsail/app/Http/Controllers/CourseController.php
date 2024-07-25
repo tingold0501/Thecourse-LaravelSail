@@ -234,10 +234,10 @@ class CourseController extends Controller
         $result = DB::Table('courses')->where('course_cate_id',$id)->get();
         return $result;
     }
-    public function getAdminCourses (){
-        $result= $this->getCourse();
-        return response()->json($result);
-    }
+    // public function getAdminCourses (){
+    //     $result= $this->getCourse();
+    //     return response()->json($result);
+    // }
     //======================
     public function createCourse(Request $request){
         $validator =  Validator::make(
