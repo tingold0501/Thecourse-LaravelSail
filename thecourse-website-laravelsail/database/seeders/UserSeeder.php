@@ -43,7 +43,7 @@ class UserSeeder extends Seeder
             "phone" => "0981651108",
             "created_at"=>now(),
             "updated_at"=>now(),
-            "role_id" => "5"
+            "role_id" => "2"
             ],
             [
             "name" => "Nguyễn Tiên Hưng",
